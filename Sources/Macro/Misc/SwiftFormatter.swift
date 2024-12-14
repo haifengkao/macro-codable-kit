@@ -12,6 +12,9 @@ extension String {
             let lines = self.components(separatedBy: .newlines)
             var formattedLines: [String] = []
             var currentIndentLevel = 0
+            var isInEnum = false
+            var isInSwitch = false
+            var inSwitchCase = false
             
             for line in lines {
                 let trimmedLine = line.trimmingCharacters(in: .whitespaces)
@@ -22,13 +25,41 @@ extension String {
                     continue
                 }
                 
-                // Decrease indent for closing braces/parentheses
-                if trimmedLine.hasPrefix("}") || trimmedLine.hasPrefix(")") {
+                // Track contexts
+                if trimmedLine.hasPrefix("enum ") {
+                    isInEnum = true
+                } else if trimmedLine.hasPrefix("switch ") {
+                    isInSwitch = true
+                }
+                
+                // Special handling for cases
+                let isEnumCase = isInEnum && trimmedLine.hasPrefix("case ")
+                let isSwitchCase = isInSwitch && trimmedLine.hasPrefix("case ")
+                
+                // Adjust indent level before switch cases
+                if isSwitchCase {
+                    currentIndentLevel -= 1
+                    inSwitchCase = true
+                } else if inSwitchCase && !trimmedLine.hasPrefix("case ") {
+                    currentIndentLevel += 1
+                    inSwitchCase = false
+                }
+                
+                // Decrease indent for closing braces
+                if trimmedLine.hasPrefix("}") {
+                    if isInSwitch {
+                        isInSwitch = false
+                    }
+                    if isInEnum {
+                        isInEnum = false
+                    }
+                    currentIndentLevel = max(0, currentIndentLevel - 1)
+                } else if trimmedLine.hasPrefix(")") {
                     currentIndentLevel = max(0, currentIndentLevel - 1)
                 }
                 
                 // Add indentation
-                let indentation = String(repeating: "    ", count: currentIndentLevel)
+                let indentation = String(repeating: "    ", count: max(0, currentIndentLevel))
                 formattedLines.append(indentation + trimmedLine)
                 
                 // Increase indent after opening braces
