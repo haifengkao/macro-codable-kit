@@ -19,12 +19,6 @@ extension String {
             for line in lines {
                 let preprocessedLine = line.preprocessLine()
                 
-                // Skip empty lines
-                guard !preprocessedLine.isEmpty else {
-                    formattedLines.append("")
-                    continue
-                }
-                
                 // Track contexts
                 if preprocessedLine.hasPrefix("enum ") {
                     isInEnum = true
@@ -60,7 +54,12 @@ extension String {
                 
                 // Add indentation
                 let indentation = String(repeating: "    ", count: max(0, currentIndentLevel))
-                formattedLines.append(indentation + preprocessedLine)
+                
+                if preprocessedLine.isEmpty, currentIndentLevel > 0 {
+                    // ignore empty lines with indent
+                } else {
+                    formattedLines.append(indentation + preprocessedLine)
+                }
                 
                 // Increase indent after opening braces
                 if preprocessedLine.hasSuffix("{") {
