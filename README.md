@@ -1,3 +1,6 @@
+# What I did
+I remove the heavy swift-format dependency to reduce compile time and potential compile problem.
+
 # MacroCodableKit
 
 **MacroCodableKit** enhances your `Codable` experience in Swift, leveraging macros to generate precise and efficient code with zero additional memory allocations, thanks to the usage of pure (static) functions. It's a comprehensive solution providing support for `AllOf`, `OneOf`, and customizable `CodingKeys`, extending the native Codable capabilities to keep up with OpenAPI specification seamlessly.
