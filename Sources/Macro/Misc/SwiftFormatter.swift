@@ -17,7 +17,8 @@ extension String {
             var inSwitchCase = false
             
             for line in lines {
-                let preprocessedLine = line.preprocessLine()
+                let preprocessedLine = line.trimmingCharacters(in: .whitespaces)
+
                 
                 // Track contexts
                 if preprocessedLine.hasPrefix("enum ") {
@@ -58,7 +59,18 @@ extension String {
                 if preprocessedLine.isEmpty, currentIndentLevel > 0 {
                     // ignore empty lines with indent
                 } else {
-                    formattedLines.append(indentation + preprocessedLine)
+                    
+                    if preprocessedLine.contains("CustomCodingDecoding.decode(") {
+                        formattedLines.append(formatCustomCodingCall(preprocessedLine, indentLevel: currentIndentLevel-1))
+                    } else if preprocessedLine.contains("throw DecodingError.dataCorrupted") {
+                        formattedLines.append(formatCustomCodingCall(preprocessedLine, indentLevel: currentIndentLevel-2))
+                    } else if preprocessedLine.contains("CustomCodingDecoding.safeDecoding") {
+                        formattedLines.append(formatCustomCodingCall(preprocessedLine, indentLevel: currentIndentLevel-2))
+                    } else if preprocessedLine.contains("try CustomCodingEncoding.encode("), line.count >= 116 {
+                        formattedLines.append(formatCustomCodingCall(preprocessedLine, indentLevel: currentIndentLevel-2))
+                    } else {
+                        formattedLines.append(indentation + preprocessedLine)
+                    }
                 }
                 
                 // Increase indent after opening braces
@@ -85,18 +97,8 @@ private extension String {
         return indentation + self
     }
     
-    func preprocessLine() -> String {
-        let trimmed = self.trimmingCharacters(in: .whitespaces)
-        
-        // Handle long function calls with specific patterns
-        if trimmed.contains("CustomCodingDecoding.decode(") {
-            return formatCustomCodingCall(trimmed)
-        }
-        
-        return trimmed
-    }
-    
-    func formatCustomCodingCall(_ line: String) -> String {
+   
+    func formatCustomCodingCall(_ line: String, indentLevel: Int) -> String {
         // Extract components
         guard let openParenIndex = line.firstIndex(of: "("),
               let closeParenIndex = line.lastIndex(of: ")") else {
@@ -104,14 +106,37 @@ private extension String {
         }
         
         let prefix = String(line[..<openParenIndex])
-        let arguments = line[line.index(after: openParenIndex)..<closeParenIndex]
-            .split(separator: ",")
-            .map { $0.trimmingCharacters(in: .whitespaces) }
+        let argumentsString = String(line[line.index(after: openParenIndex)..<closeParenIndex])
+        
+        // Parse arguments respecting nested parentheses
+        var arguments: [String] = []
+        var currentArg = ""
+        var parenCount = 0
+        
+        for char in argumentsString {
+            switch char {
+            case "(" where parenCount >= 0:
+                parenCount += 1
+                currentArg.append(char)
+            case ")" where parenCount > 0:
+                parenCount -= 1
+                currentArg.append(char)
+            case "," where parenCount == 0:
+                arguments.append(currentArg.trimmingCharacters(in: .whitespaces))
+                currentArg = ""
+            default:
+                currentArg.append(char)
+            }
+        }
+        
+        if !currentArg.isEmpty {
+            arguments.append(currentArg.trimmingCharacters(in: .whitespaces))
+        }
 
         // Format the call
         return """
         \(prefix)(
-                    \(arguments.joined(separator: ",\n            "))
+        \(arguments.map {$0.indent(level: indentLevel)}.joined(separator: ",\n"))
         )
         """
     }
