@@ -28,7 +28,7 @@ extension String {
                 }
                 
                 // Special handling for cases
-                let isEnumCase = isInEnum && preprocessedLine.hasPrefix("case ")
+                
                 let isSwitchCase = isInSwitch && preprocessedLine.hasPrefix("case ")
                 
                 // Adjust indent level before switch cases
