@@ -23,12 +23,6 @@ let package = Package(
             from: "509.0.0"
         ),
 
-        // Format Swift code
-        .package(
-            url: "https://github.com/apple/swift-format.git",
-            from: "509.0.0"
-        ),
-
         // Tools for macro development
         .package(
             url: "https://github.com/stackotter/swift-macro-toolkit",
@@ -55,7 +49,6 @@ let package = Package(
                 .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
                 .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
                 .product(name: "MacroToolkit", package: "swift-macro-toolkit"),
-                .product(name: "SwiftFormat", package: "swift-format"),
             ]
         ),
 
