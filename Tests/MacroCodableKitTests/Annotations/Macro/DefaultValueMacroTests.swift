@@ -52,7 +52,7 @@ final class DefaultValueMacroTests: XCTestCase {
                 }
 
                 extension DefaultValueBool__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case boolean1
                         case boolean2
                         case boolean3
@@ -120,7 +120,7 @@ final class DefaultValueMacroTests: XCTestCase {
                 }
 
                 extension DefaultValueInt__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int1
                         case int2
                         case int3
@@ -176,7 +176,7 @@ final class DefaultValueMacroTests: XCTestCase {
                 }
 
                 extension A__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int1
                         case int2
                         case string

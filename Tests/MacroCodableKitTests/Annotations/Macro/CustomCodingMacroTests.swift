@@ -42,7 +42,7 @@ final class CustomCodingMacroTests: XCTestCase {
                 }
 
                 extension SafeCodingArray1__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case strings
                         case safeStrings
                     }
@@ -80,7 +80,7 @@ final class CustomCodingMacroTests: XCTestCase {
                 }
 
                 extension SafeCodingArray2__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case safeStrings
                     }
                     init(from decoder: Decoder) throws {
@@ -119,7 +119,7 @@ final class CustomCodingMacroTests: XCTestCase {
                 }
 
                 extension SafeCodingDictionary2__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case stringByInt
                         case safeStringByInt
                     }
@@ -161,7 +161,7 @@ final class CustomCodingMacroTests: XCTestCase {
                 }
 
                 extension SafeCodingDictionary3__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case intByString
                         case safeIntByString
                     }
@@ -199,7 +199,7 @@ final class CustomCodingMacroTests: XCTestCase {
                 }
 
                 extension SomeTypeCustomCoding__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case someType
                     }
                     init(from decoder: Decoder) throws {

@@ -63,7 +63,7 @@ final class OneOfDecodableMacroTests: XCTestCase {
                 }
 
                 extension Applicable__testing__: Decodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int
                         case optionalInt
                     }
@@ -161,7 +161,7 @@ final class OneOfDecodableMacroTests: XCTestCase {
                 }
 
                 extension NoCodableExample__testing__: Decodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int
                     }
                     init(from decoder: Decoder) throws {
@@ -179,7 +179,7 @@ final class OneOfDecodableMacroTests: XCTestCase {
                 }
 
                 extension OnlyEncodableExample__testing__: Decodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int
                     }
                     init(from decoder: Decoder) throws {
@@ -252,7 +252,7 @@ final class OneOfDecodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable1__testing__: Decodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int
                     }
                     init(from decoder: Decoder) throws {
@@ -270,7 +270,7 @@ final class OneOfDecodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable2__testing__: Decodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int
                     }
                     init(from decoder: Decoder) throws {
@@ -288,7 +288,7 @@ final class OneOfDecodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable3__testing__: Decodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int
                     }
                     init(from decoder: Decoder) throws {
@@ -306,7 +306,7 @@ final class OneOfDecodableMacroTests: XCTestCase {
                 }
 
                 extension PublicCodable1__testing__: Decodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case int
                     }
                     init(from decoder: Decoder) throws {

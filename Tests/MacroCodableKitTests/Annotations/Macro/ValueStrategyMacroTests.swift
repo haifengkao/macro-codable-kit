@@ -44,7 +44,7 @@ final class ValueStrategyMacroTests: XCTestCase {
                 }
 
                 extension Base64Struct__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case data
                         case data
                         case data

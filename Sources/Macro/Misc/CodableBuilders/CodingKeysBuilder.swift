@@ -31,7 +31,7 @@ struct CodingKeysBuilder: CodeBuildable {
             } else {
                 DeclarationBuilder(
                     accessModifier: buildingData.accessModifier,
-                    signature: "enum CodingKeys: String, CodingKey"
+                    signature: "enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable"
                 ) {
                     buildingData.items.map { item in
                         "case \(item.identifier)" + (item.customCodingKey.map { " = \"\($0)\"" } ?? "")

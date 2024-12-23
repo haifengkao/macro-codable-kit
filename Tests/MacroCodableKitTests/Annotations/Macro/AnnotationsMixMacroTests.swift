@@ -44,7 +44,7 @@ final class AnnotationsMixMacroTests: XCTestCase {
                 }
 
                 extension DefaultValueBool__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case boolean1
                         case boolean2
                     }

@@ -22,7 +22,7 @@
 /// Will generate `Decodable` conformance using ``CustomCodingDecoding`` for variables with custom coding
 /// ```swift
 /// extension Exmaple: Decodable {
-///     enum CodingKeys: String, CodingKey {
+///     enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
 ///         case variable
 ///     }
 ///     init(from decoder: Decoder) throws {

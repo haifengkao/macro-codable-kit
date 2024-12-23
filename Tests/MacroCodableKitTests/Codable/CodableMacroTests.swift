@@ -83,7 +83,7 @@ final class CodableMacroTests: XCTestCase {
                 }
 
                 extension Example__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                         case company
                         case customCompanyKey = "custom_company"
@@ -170,7 +170,7 @@ final class CodableMacroTests: XCTestCase {
                 }
 
                 extension NoCodableExample__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     init(from decoder: Decoder) throws {
@@ -184,7 +184,7 @@ final class CodableMacroTests: XCTestCase {
                 }
 
                 extension OnlyEncodableExample__testing__: Decodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     init(from decoder: Decoder) throws {
@@ -194,7 +194,7 @@ final class CodableMacroTests: XCTestCase {
                 }
 
                 extension OnlyDecodableExample__testing__: Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     func encode(to encoder: Encoder) throws {
@@ -292,7 +292,7 @@ final class CodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable1__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     init(from decoder: Decoder) throws {
@@ -306,7 +306,7 @@ final class CodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable2__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     init(from decoder: Decoder) throws {
@@ -320,7 +320,7 @@ final class CodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable3__testing__: Decodable, Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     init(from decoder: Decoder) throws {

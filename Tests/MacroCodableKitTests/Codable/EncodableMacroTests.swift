@@ -83,7 +83,7 @@ final class EncodableMacroTests: XCTestCase {
                 }
 
                 extension Example__testing__: Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                         case company
                         case customCompanyKey = "custom_company"
@@ -162,7 +162,7 @@ final class EncodableMacroTests: XCTestCase {
                 }
 
                 extension NoCodableExample__testing__: Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     func encode(to encoder: Encoder) throws {
@@ -172,7 +172,7 @@ final class EncodableMacroTests: XCTestCase {
                 }
 
                 extension OnlyDecodableExample__testing__: Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     func encode(to encoder: Encoder) throws {
@@ -264,7 +264,7 @@ final class EncodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable1__testing__: Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     func encode(to encoder: Encoder) throws {
@@ -274,7 +274,7 @@ final class EncodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable2__testing__: Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     func encode(to encoder: Encoder) throws {
@@ -284,7 +284,7 @@ final class EncodableMacroTests: XCTestCase {
                 }
 
                 extension NoPublicCodable3__testing__: Encodable {
-                    enum CodingKeys: String, CodingKey {
+                    enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
                         case brand
                     }
                     func encode(to encoder: Encoder) throws {

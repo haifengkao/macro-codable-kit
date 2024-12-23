@@ -22,7 +22,7 @@
 /// Will generate `Encodable` conformance using ``CustomCodingEncoding`` for variables with custom coding
 /// ```swift
 /// extension Exmaple: Encodable {
-///     enum CodingKeys: String, CodingKey {
+///     enum CodingKeys: String, CodingKey, CaseIterable, Sendable, Hashable {
 ///         case variable
 ///     }
 ///     func encode(to encoder: Encoder) throws {
