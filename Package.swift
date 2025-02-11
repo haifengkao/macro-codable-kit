@@ -26,7 +26,7 @@ let package = Package(
         // Tools for macro development
         .package(
             url: "https://github.com/stackotter/swift-macro-toolkit",
-            from: "0.3.0"
+            exact: "0.3.1"
         ),
 
         // Tools for macro development
