@@ -20,7 +20,7 @@ let package = Package(
         // Read Swift code
         .package(
             url: "https://github.com/swiftlang/swift-syntax.git",
-            from: "509.0.0"
+            from: "600.0.0"
         ),
 
         // Tools for macro development
